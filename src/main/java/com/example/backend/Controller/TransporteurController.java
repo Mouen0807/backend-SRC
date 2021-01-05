@@ -18,7 +18,7 @@ import java.util.List;
 
 @Api(description="Api management Transporteur")
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/api/Transporteur/")
 public class TransporteurController {
 
     private static final Logger logger = LoggerFactory.getLogger(TransporteurController.class);
@@ -27,44 +27,44 @@ public class TransporteurController {
 
 
     @ApiOperation(value="find Transporteur by id")
-    @RequestMapping(value = "/Transporteur/id/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/id/{id}", method = RequestMethod.GET)
     public Transporteur findTransporteurById(@PathVariable Long id) {
         logger.info("find transporteur by id");
         return transporteurServiceImpl.findById(id);
     }
 
     @ApiOperation(value="delete Transporteur by id")
-    @RequestMapping(value = "/Transporteur/delete/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public void deleteById(@PathVariable Long id) {
         logger.info("delete transporteur by id");
         transporteurServiceImpl.delete(id);
     }
 
     @ApiOperation(value="get all Transporteur")
-    @RequestMapping(value="/Transporteur/all", method = RequestMethod.GET)
+    @RequestMapping(value="/all", method = RequestMethod.GET)
     public List<Transporteur> findAllTransporteur() {
         logger.info("find all transporteur");
         return transporteurServiceImpl.findAll();
     }
 
     @ApiOperation(value="update a Transporteur")
-    @RequestMapping(value = "/Transporteur/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
     public Transporteur updateTransporteur(@RequestBody Transporteur transporteur) {
         logger.info("update a transporteur");
         return transporteurServiceImpl.update(transporteur);
     }
 
     @ApiOperation(value="add a Transporteur")
-    @RequestMapping(value = "/Transporteur/{Vignette}/{datePoliceAssurance}/{dateVisiteTechnique}/{datecarteBleue}/{datePatente}" +
+    @RequestMapping(value = "/{Vignette}/{datePoliceAssurance}/{dateVisiteTechnique}/{dateCarteBleue}/{datePatente}" +
             "/{impotStationnement}", method = RequestMethod.POST)
     public ResponseEntity<Transporteur> addTransporteur(@PathVariable Date datePoliceAssurance,@PathVariable
             Date dateVisiteTechnique,@PathVariable Date dateCarteBleue,@PathVariable Date datePatente,
-            @PathVariable boolean impotStationnement, @PathVariable boolean vignette) {
+            @PathVariable boolean impotStationnement, @PathVariable boolean Vignette) {
         logger.info("add a Transporteur");
         Transporteur transporteur=new Transporteur();
         transporteur.setDateVisiteTechnique(dateVisiteTechnique);
         transporteur.setDatePoliceAssurance(datePoliceAssurance);
-        transporteur.setVignette(vignette);
+        transporteur.setVignette(Vignette);
         transporteur.setDateCarteBleue(dateCarteBleue);
         transporteur.setDatePatente(datePatente);
         transporteur.setImpotStationnement(impotStationnement);
@@ -76,7 +76,7 @@ public class TransporteurController {
             return ResponseEntity.noContent().build();
         }
 
-        URI location= ServletUriComponentsBuilder.fromPath("/Transporteur/id/{id}").
+        URI location= ServletUriComponentsBuilder.fromPath("/id/{id}").
                 buildAndExpand(responseTransporteur.getId())
                 .toUri();
         return ResponseEntity.created(location).build();

@@ -17,7 +17,7 @@ import java.util.List;
 
 @Api(description ="Api management PosteControle")
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/api/PosteControle/")
 public class PosteControleController {
 
     private static final Logger logger = LoggerFactory.getLogger(PosteControleController.class);
@@ -26,35 +26,35 @@ public class PosteControleController {
 
 
     @ApiOperation(value="find PosteControle by id")
-    @RequestMapping(value = "/PosteControle/id/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/id/{id}", method = RequestMethod.GET)
     public PosteControle findPosteControleById(@PathVariable Long id) {
         logger.info("find posteControle by id");
         return posteControleServiceImpl.findById(id);
     }
 
     @ApiOperation(value="delete PosteControle by id")
-    @RequestMapping(value = "/PosteControle/delete/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public void deleteById(@PathVariable Long id) {
         logger.info("delete posteControle by id");
         posteControleServiceImpl.delete(id);
     }
 
     @ApiOperation(value="get all PosteControle")
-    @RequestMapping(value="/PosteControle/all", method = RequestMethod.GET)
+    @RequestMapping(value="/all", method = RequestMethod.GET)
     public List<PosteControle> findAllPosteControle() {
         logger.info("find all posteControle");
         return posteControleServiceImpl.findAll();
     }
 
     @ApiOperation(value="update a PosteControle")
-    @RequestMapping(value = "/PosteControle/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
     public PosteControle updatePosteControle(@RequestBody PosteControle posteControle) {
         logger.info("update a posteControle");
         return posteControleServiceImpl.update(posteControle);
     }
 
     @ApiOperation(value="add a PosteControle")
-    @RequestMapping(value = "/PosteControle/{Adresse}/{NumeroPoste}", method = RequestMethod.POST)
+    @RequestMapping(value = "/{Adresse}/{NumeroPoste}", method = RequestMethod.POST)
     public ResponseEntity<PosteControle> addPosteControle(@PathVariable String Adresse, @PathVariable String NumeroPoste) {
         logger.info("add a PosteControle");
         PosteControle posteControle=new PosteControle();
@@ -69,7 +69,7 @@ public class PosteControleController {
             return ResponseEntity.noContent().build();
         }
 
-        URI location= ServletUriComponentsBuilder.fromPath("/PosteControle/id/{id}").
+        URI location= ServletUriComponentsBuilder.fromPath("/id/{id}").
                 buildAndExpand(responsePosteControle.getId())
                 .toUri();
         return ResponseEntity.created(location).build();

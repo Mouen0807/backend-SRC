@@ -38,7 +38,7 @@ public class PosteControleServiceImpl implements PosteControleServiceI {
 
     @Override
     public PosteControle findById(Long id) {
-        return posteControleDAOI.getOne(id);
+        return posteControleDAOI.findById(id).get();
     }
 
     @Override

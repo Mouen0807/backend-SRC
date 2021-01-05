@@ -18,7 +18,7 @@ import java.util.List;
 
 @Api(description ="Api management Sanction")
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/api/Sanction/")
 public class SanctionController {
 
     private static final Logger logger = LoggerFactory.getLogger(SanctionController.class);
@@ -27,35 +27,35 @@ public class SanctionController {
 
 
     @ApiOperation(value="find Sanction by id")
-    @RequestMapping(value = "/Sanction/id/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/id/{id}", method = RequestMethod.GET)
     public Sanction findSanctionById(@PathVariable Long id) {
         logger.info("find sanction by id");
         return sanctionServiceImpl.findById(id);
     }
 
     @ApiOperation(value="delete Sanction by id")
-    @RequestMapping(value = "/Sanction/delete/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public void deleteById(@PathVariable Long id) {
         logger.info("delete sanction by id");
         sanctionServiceImpl.delete(id);
     }
 
     @ApiOperation(value="get all Sanction")
-    @RequestMapping(value="/Sanction/all", method = RequestMethod.GET)
+    @RequestMapping(value="/all", method = RequestMethod.GET)
     public List<Sanction> findAllSanction() {
         logger.info("find all sanction");
         return sanctionServiceImpl.findAll();
     }
 
     @ApiOperation(value="update a Sanction")
-    @RequestMapping(value = "/Sanction/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
     public Sanction updateSanction(@RequestBody Sanction sanction) {
         logger.info("update a sanction");
         return sanctionServiceImpl.update(sanction);
     }
 
     @ApiOperation(value="add a Sanction")
-    @RequestMapping(value = "/Sanction/{Description}/{Penalite}", method = RequestMethod.POST)
+    @RequestMapping(value = "/{Description}/{Penalite}", method = RequestMethod.POST)
     public ResponseEntity<Sanction> addSanction(@PathVariable String Description,@PathVariable String Penalite) {
         logger.info("add a Sanction");
         Sanction sanction=new Sanction();
@@ -70,7 +70,7 @@ public class SanctionController {
             return ResponseEntity.noContent().build();
         }
 
-        URI location= ServletUriComponentsBuilder.fromPath("/Sanction/id/{id}").
+        URI location= ServletUriComponentsBuilder.fromPath("/id/{id}").
                 buildAndExpand(responseSanction.getId())
                 .toUri();
         return ResponseEntity.created(location).build();

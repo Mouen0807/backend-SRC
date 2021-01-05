@@ -43,7 +43,7 @@ public class CarteGriseServiceImpl implements CarteGriseServiceI {
 
     @Override
     public CarteGrise findById(Long id) {
-        return carteGriseDAOI.getOne(id);
+        return carteGriseDAOI.findById(id).get();
     }
 
     @Override

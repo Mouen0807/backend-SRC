@@ -39,7 +39,7 @@ public class SanctionServiceImpl implements SanctionServiceI {
 
     @Override
     public Sanction findById(Long id) {
-        return sanctionDAOI.getOne(id);
+        return sanctionDAOI.findById(id).get();
     }
 
     @Override

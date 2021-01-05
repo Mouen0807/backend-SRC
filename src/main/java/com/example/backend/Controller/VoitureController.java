@@ -17,7 +17,7 @@ import java.util.List;
 
 @Api(description="Api management Voiture")
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/api/Voiture/")
 public class VoitureController {
 
     private static final Logger logger = LoggerFactory.getLogger(VoitureController.class);
@@ -26,42 +26,42 @@ public class VoitureController {
 
 
     @ApiOperation(value="find Voiture by id")
-    @RequestMapping(value = "/Voiture/id/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/id/{id}", method = RequestMethod.GET)
     public Voiture findVoitureById(@PathVariable Long id) {
         logger.info("find voiture by id");
         return voitureServiceImpl.findById(id);
     }
 
     @ApiOperation(value="delete Voiture by id")
-    @RequestMapping(value = "/Voiture/delete/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public void deleteById(@PathVariable Long id) {
         logger.info("delete voiture by id");
         voitureServiceImpl.delete(id);
     }
 
     @ApiOperation(value="get all Voiture")
-    @RequestMapping(value="/Voiture/all", method = RequestMethod.GET)
+    @RequestMapping(value="/all", method = RequestMethod.GET)
     public List<Voiture> findAllVoiture() {
         logger.info("find all voiture");
         return voitureServiceImpl.findAll();
     }
 
     @ApiOperation(value="update a Voiture")
-    @RequestMapping(value = "/Voiture/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
     public Voiture updateVoiture(@RequestBody Voiture voiture) {
         logger.info("update a voiture");
         return voitureServiceImpl.update(voiture);
     }
 
     @ApiOperation(value="add a Voiture")
-    @RequestMapping(value = "/Voiture/{Vignette}/{datePoliceAssurance}/{dateVisiteTechnique}", method = RequestMethod.POST)
+    @RequestMapping(value = "/{datePoliceAssurance}/{dateVisiteTechnique}/{Vignette}", method = RequestMethod.POST)
     public ResponseEntity<Voiture> addVoiture(@PathVariable Date datePoliceAssurance,@PathVariable
-            Date dateVisiteTechnique, @PathVariable boolean vignette) {
+            Date dateVisiteTechnique, @PathVariable boolean Vignette) {
         logger.info("add a Voiture");
         Voiture voiture=new Voiture();
         voiture.setDateVisiteTechnique(dateVisiteTechnique);
         voiture.setDatePoliceAssurance(datePoliceAssurance);
-        voiture.setVignette(vignette);
+        voiture.setVignette(Vignette);
 
 
         Voiture responseVoiture=voitureServiceImpl.save(voiture);
@@ -70,7 +70,7 @@ public class VoitureController {
             return ResponseEntity.noContent().build();
         }
 
-        URI location= ServletUriComponentsBuilder.fromPath("/Voiture/id/{id}").
+        URI location= ServletUriComponentsBuilder.fromPath("/id/{id}").
                 buildAndExpand(responseVoiture.getId())
                 .toUri();
         return ResponseEntity.created(location).build();

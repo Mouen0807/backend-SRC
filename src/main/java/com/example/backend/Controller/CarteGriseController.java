@@ -17,7 +17,7 @@ import java.util.List;
 
 @Api(description ="Api management CarteGrise")
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/api/CarteGrise/")
 public class CarteGriseController {
 
     private static final Logger logger = LoggerFactory.getLogger(CarteGriseController.class);
@@ -26,35 +26,35 @@ public class CarteGriseController {
 
 
     @ApiOperation(value="find CarteGrise by id")
-    @RequestMapping(value = "/CarteGrise/id/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/id/{id}", method = RequestMethod.GET)
     public CarteGrise findCarteGriseById(@PathVariable Long id) {
         logger.info("find carteGrise by id");
         return carteGriseServiceImpl.findById(id);
     }
 
     @ApiOperation(value="delete CarteGrise by id")
-    @RequestMapping(value = "/CarteGrise/delete/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public void deleteById(@PathVariable Long id) {
         logger.info("delete carteGrise by id");
         carteGriseServiceImpl.delete(id);
     }
 
     @ApiOperation(value="get all CarteGrise")
-    @RequestMapping(value="/CarteGrise/all", method = RequestMethod.GET)
+    @RequestMapping(value="/all", method = RequestMethod.GET)
     public List<CarteGrise> findAllCarteGrise() {
         logger.info("find all carteGrise");
         return carteGriseServiceImpl.findAll();
     }
 
     @ApiOperation(value="update a CarteGrise")
-    @RequestMapping(value = "/CarteGrise/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
     public CarteGrise updateCarteGrise(@RequestBody CarteGrise carteGrise) {
         logger.info("update a carteGrise");
         return carteGriseServiceImpl.update(carteGrise);
     }
 
     @ApiOperation(value="add a CarteGrise")
-    @RequestMapping(value = "/CarteGrise/{NomProprietaire}/{Immatriculation}/{DateAcquisition}/{DateExpiration}"
+    @RequestMapping(value = "/{NomProprietaire}/{Immatriculation}/{DateAcquisition}/{DateExpiration}"
             +"/{NumeroChassis}/{Adresse}", method = RequestMethod.POST)
     public ResponseEntity<CarteGrise> addCarteGrise(@PathVariable String NomProprietaire, @PathVariable String Immatriculation,
                                                     @PathVariable Date DateAcquisition, @PathVariable Date DateExpiration,
@@ -74,7 +74,7 @@ public class CarteGriseController {
             return ResponseEntity.noContent().build();
         }
 
-        URI location= ServletUriComponentsBuilder.fromPath("/CarteGrise/id/{id}").
+        URI location= ServletUriComponentsBuilder.fromPath("/id/{id}").
                 buildAndExpand(responseCarteGrise.getId())
                 .toUri();
         return ResponseEntity.created(location).build();

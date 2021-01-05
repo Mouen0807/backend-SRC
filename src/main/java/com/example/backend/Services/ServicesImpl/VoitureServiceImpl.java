@@ -43,7 +43,7 @@ public class VoitureServiceImpl implements VoitureServiceI {
 
     @Override
     public Voiture findById(Long id) {
-        return voitureDAOI.getOne(id);
+        return voitureDAOI.findById(id).get();
     }
 
     @Override

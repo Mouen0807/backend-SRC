@@ -47,7 +47,7 @@ public class TransporteurServiceImpl implements TransporteurServiceI {
 
     @Override
     public Transporteur findById(Long id) {
-        return transporteurDAOI.getOne(id);
+        return transporteurDAOI.findById(id).get();
     }
 
     @Override
